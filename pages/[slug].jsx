@@ -4,8 +4,9 @@ import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 
+const url = process.env.STRAPI_BACKEND_URL;
 const client = new ApolloClient({
-  uri: "http://127.0.0.1:1337/graphql",
+  uri: `${url}/graphql`,
   cache: new InMemoryCache(),
 });
 
@@ -54,10 +55,8 @@ export const getStaticProps = async ({ params }) => {
   });
 
   const attrs = data.blogPosts.data[0].attributes;
-  const modifiedHtml = attrs.Content.replace(
-    /\/uploads/g,
-    "http://localhost:1337/uploads"
-  );
+
+  const modifiedHtml = attrs.Content.replace("http://localhost:1337/", url);
 
   const html = await serialize(modifiedHtml);
   return {

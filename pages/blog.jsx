@@ -28,8 +28,9 @@ const Blog = ({ posts }) => {
 };
 
 export async function getStaticProps() {
+  const url = process.env.STRAPI_BACKEND_URL;
   const client = new ApolloClient({
-    uri: "http://127.0.0.1:1337/graphql",
+    uri: `${url}/graphql`,
     cache: new InMemoryCache(),
   });
 
