@@ -14,7 +14,7 @@ const Post = ({ post }) => {
   console.log(post.content);
   return (
     <Layout text={`/${post.title}`}>
-      <div className="w-7/12 my-10">
+      <div className="lg:w-7/12 w-full my-10">
         {" "}
         <div className="text-3xl font-bold text-red-600">{post.title}</div>
         <div className="my-5">
